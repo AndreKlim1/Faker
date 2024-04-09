@@ -25,6 +25,11 @@ namespace Faker
             {typeof(DateTime), () => GetRandomDateTime() },
         };
 
+        private static readonly Dictionary<Type, Func<Type, object>> _collectionTypes = new Dictionary<Type, Func<Type, object>>()
+        {
+            { typeof(List<>),(type) => GetRandomList(type)},
+        };
+
         private static object GetRandomChar()
         {
             return (char)_random.Next(PRINTABLE_START, PRINTABLE_END);
@@ -78,10 +83,7 @@ namespace Faker
             return _random.Next();
         }
 
-        private static readonly Dictionary<Type, Func<Type, object>> _collectionTypes = new Dictionary<Type, Func<Type, object>>()
-        {
-            { typeof(List<>),(type) => GetRandomList(type)},
-        };
+        
 
         private static object GetRandomList(Type type)
         {
